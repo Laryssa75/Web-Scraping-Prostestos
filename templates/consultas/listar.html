@@ -1,0 +1,26 @@
+<h2>Lista de CNPJs</h2>
+<a href="{% url 'adicionar_cnpj' %}">Adicionar novo Cnpj</a>
+<form method="post" action="{% url 'consultar_todos' %}">
+    {% csrf_token %}
+    <button type="button">Consultar Todos os Pendentes</button>
+</form>
+<table border="1">
+    <thead>
+        <tr>
+            <th>CNPJ</th>
+            <th>Resultado</th>
+            <th>Data de Consulta</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cnpj in cnpjs %}
+        <tr>
+            <td>{{ cnpj.cnpj }}</td>
+            <td>{{ cnpj.resultado|default:"-" }}</td>
+            <td>{{ cnpj.consultad_data|default:"-" }}</td>
+            <td>{{ cnpj.status }}</td>
+        </tr>
+        {% enfor %}
+    </tbody>
+</table>
